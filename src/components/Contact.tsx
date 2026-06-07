@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import type { ContactFieldErrors } from "@/lib/contact";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
@@ -13,47 +13,67 @@ export default function Contact() {
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("loading");
-    setErrorMessage("");
-    setFieldErrors({});
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const payload = {
-      nama: formData.get("nama"),
-      telepon: formData.get("telepon"),
-      email: formData.get("email"),
-      layanan: formData.get("layanan"),
-      pesan: formData.get("pesan"),
-    };
+    const nama = String(formData.get("nama") ?? "");
+    const telepon = String(formData.get("telepon") ?? "");
+    const email = String(formData.get("email") ?? "");
+    const layanan = String(formData.get("layanan") ?? "");
+    const pesan = String(formData.get("pesan") ?? "");
+
+    const message = `Halo, saya ${nama || "-"}\nSaya ingin konsultasi tentang: ${
+      layanan || "-"
+    }\nNomor telepon: ${telepon || "-"}\nEmail: ${email || "-"}\nPesan: ${pesan || "-"}`;
+
+    const OFFICE_WA = "+62 812 3456 7890";
+    const phone = normalizePhoneNumber(OFFICE_WA);
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const data = (await res.json()) as {
-        success?: boolean;
-        error?: string;
-        errors?: ContactFieldErrors;
-      };
-
-      if (!res.ok) {
-        if (data.errors) setFieldErrors(data.errors);
-        setErrorMessage(data.error ?? "Terjadi kesalahan. Silakan coba lagi.");
-        setStatus("error");
-        return;
-      }
-
+      window.open(url, "_blank");
       setStatus("success");
       form.reset();
     } catch {
-      setErrorMessage(
-        "Tidak dapat terhubung ke server. Periksa koneksi internet Anda."
-      );
+      setErrorMessage("Gagal membuka WhatsApp. Silakan coba manual.");
       setStatus("error");
     }
+  }
+
+  // Open WhatsApp chat with prefilled message using form values
+  function normalizePhoneNumber(input: string) {
+    const digits = input.replace(/\D/g, "");
+    if (!digits) return "6281234567890"; // fallback office number
+    if (digits.startsWith("0")) return `62${digits.slice(1)}`;
+    if (!digits.startsWith("62")) return `62${digits}`;
+    return digits;
+  }
+
+  function handleWhatsappClick(e: React.MouseEvent<HTMLButtonElement>) {
+    const btn = e.currentTarget;
+    const form = btn.closest("form") as HTMLFormElement | null;
+    const OFFICE_WA = "+62 812 3456 7890";
+
+    let nama = "";
+    let telepon = "";
+    let email = "";
+    let layanan = "";
+    let pesan = "";
+
+    if (form) {
+      const formData = new FormData(form);
+      nama = String(formData.get("nama") ?? "");
+      telepon = String(formData.get("telepon") ?? "");
+      email = String(formData.get("email") ?? "");
+      layanan = String(formData.get("layanan") ?? "");
+      pesan = String(formData.get("pesan") ?? "");
+    }
+
+    const message = `Halo, saya ${nama}\nSaya ingin konsultasi tentang: ${layanan || "-"}\nNomor telepon: ${telepon || "-"}\nEmail: ${email || "-"}\nPesan: ${pesan || "-"}`;
+
+    const phone = normalizePhoneNumber(OFFICE_WA);
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
   }
 
   return (
@@ -249,12 +269,12 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="w-full rounded-sm bg-navy py-3.5 text-sm font-semibold text-white transition-colors hover:bg-navy-light disabled:cursor-not-allowed disabled:opacity-70"
+                  className="w-full rounded-sm bg-green-600 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-70"
                 >
-                  {status === "loading" ? "Mengirim..." : "Kirim Permintaan Konsultasi"}
+                  {status === "loading" ? "Membuka WhatsApp..." : "Konsultasi via WhatsApp"}
                 </button>
                 <p className="text-center text-xs text-muted">
-                  Data Anda dijaga kerahasiaan sesuai kode etik advokat dan UU PDP.
+                  Dengan mengirimkan, Anda akan diarahkan ke WhatsApp untuk melanjutkan konsultasi.
                 </p>
               </form>
             )}

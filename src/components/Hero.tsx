@@ -58,7 +58,7 @@ export default function Hero() {
                 AR
               </div>
               <div>
-                <p className="font-medium text-white">Dr. Ahmad Rizaldi, S.H., M.H.</p>
+                <p className="font-medium text-white">Dr. Aida Ardini, S.H., M.H.</p>
                 <p className="text-sm text-white/50">Managing Partner</p>
               </div>
             </footer>

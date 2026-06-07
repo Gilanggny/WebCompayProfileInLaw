@@ -70,6 +70,8 @@
     --color-red-200: #ffcaca;
     --color-red-600: #e40014;
     --color-red-800: #9f0712;
+    --color-green-600: #00a544;
+    --color-green-700: #008138;
     --color-white: #fff;
     --spacing: .25rem;
     --container-sm: 24rem;
@@ -121,6 +123,8 @@
       --color-red-200: lab(86.017% 19.8815 7.75869);
       --color-red-600: lab(48.4493% 77.4328 61.5452);
       --color-red-800: lab(33.7174% 55.8993 41.0293);
+      --color-green-600: lab(59.0978% -58.6621 41.2579);
+      --color-green-700: lab(47.0329% -47.0239 31.4788);
     }
   }
 }
@@ -826,6 +830,16 @@
     }
   }
 
+  .border-navy\/10 {
+    border-color: var(--navy);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .border-navy\/10 {
+      border-color: color-mix(in oklab, var(--navy) 10%, transparent);
+    }
+  }
+
   .border-navy\/15 {
     border-color: var(--navy);
   }
@@ -936,6 +950,10 @@
     .bg-gold\/20 {
       background-color: color-mix(in oklab, var(--gold) 20%, transparent);
     }
+  }
+
+  .bg-green-600 {
+    background-color: var(--color-green-600);
   }
 
   .bg-navy {
@@ -1548,6 +1566,12 @@
   @media (hover: hover) {
     .hover\:bg-gold-light:hover {
       background-color: var(--gold-light);
+    }
+  }
+
+  @media (hover: hover) {
+    .hover\:bg-green-700:hover {
+      background-color: var(--color-green-700);
     }
   }
 

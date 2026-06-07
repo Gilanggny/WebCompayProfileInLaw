@@ -323,38 +323,55 @@ function Contact() {
     async function handleSubmit(e) {
         e.preventDefault();
         setStatus("loading");
-        setErrorMessage("");
-        setFieldErrors({});
         const form = e.currentTarget;
         const formData = new FormData(form);
-        const payload = {
-            nama: formData.get("nama"),
-            telepon: formData.get("telepon"),
-            email: formData.get("email"),
-            layanan: formData.get("layanan"),
-            pesan: formData.get("pesan")
-        };
+        const nama = String(formData.get("nama") ?? "");
+        const telepon = String(formData.get("telepon") ?? "");
+        const email = String(formData.get("email") ?? "");
+        const layanan = String(formData.get("layanan") ?? "");
+        const pesan = String(formData.get("pesan") ?? "");
+        const message = `Halo, saya ${nama || "-"}\nSaya ingin konsultasi tentang: ${layanan || "-"}\nNomor telepon: ${telepon || "-"}\nEmail: ${email || "-"}\nPesan: ${pesan || "-"}`;
+        const OFFICE_WA = "+62 812 3456 7890";
+        const phone = normalizePhoneNumber(OFFICE_WA);
+        const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
         try {
-            const res = await fetch("/api/contact", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
-            });
-            const data = await res.json();
-            if (!res.ok) {
-                if (data.errors) setFieldErrors(data.errors);
-                setErrorMessage(data.error ?? "Terjadi kesalahan. Silakan coba lagi.");
-                setStatus("error");
-                return;
-            }
+            window.open(url, "_blank");
             setStatus("success");
             form.reset();
         } catch  {
-            setErrorMessage("Tidak dapat terhubung ke server. Periksa koneksi internet Anda.");
+            setErrorMessage("Gagal membuka WhatsApp. Silakan coba manual.");
             setStatus("error");
         }
+    }
+    // Open WhatsApp chat with prefilled message using form values
+    function normalizePhoneNumber(input) {
+        const digits = input.replace(/\D/g, "");
+        if (!digits) return "6281234567890"; // fallback office number
+        if (digits.startsWith("0")) return `62${digits.slice(1)}`;
+        if (!digits.startsWith("62")) return `62${digits}`;
+        return digits;
+    }
+    function handleWhatsappClick(e) {
+        const btn = e.currentTarget;
+        const form = btn.closest("form");
+        const OFFICE_WA = "+62 812 3456 7890";
+        let nama = "";
+        let telepon = "";
+        let email = "";
+        let layanan = "";
+        let pesan = "";
+        if (form) {
+            const formData = new FormData(form);
+            nama = String(formData.get("nama") ?? "");
+            telepon = String(formData.get("telepon") ?? "");
+            email = String(formData.get("email") ?? "");
+            layanan = String(formData.get("layanan") ?? "");
+            pesan = String(formData.get("pesan") ?? "");
+        }
+        const message = `Halo, saya ${nama}\nSaya ingin konsultasi tentang: ${layanan || "-"}\nNomor telepon: ${telepon || "-"}\nEmail: ${email || "-"}\nPesan: ${pesan || "-"}`;
+        const phone = normalizePhoneNumber(OFFICE_WA);
+        const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+        window.open(url, "_blank");
     }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
         id: "kontak",
@@ -371,7 +388,7 @@ function Contact() {
                                 children: "Hubungi Kami"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                lineNumber: 64,
+                                lineNumber: 84,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -379,7 +396,7 @@ function Contact() {
                                 children: "Konsultasi Awal Gratis"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                lineNumber: 67,
+                                lineNumber: 87,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -387,7 +404,7 @@ function Contact() {
                                 children: "Ceritakan kebutuhan hukum Anda. Tim kami akan merespons dalam 1×24 jam kerja untuk menjadwalkan pertemuan awal — secara langsung atau daring."
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                lineNumber: 70,
+                                lineNumber: 90,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("address", {
@@ -430,17 +447,17 @@ function Contact() {
                                                         d: "M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
                                                     }, void 0, false, {
                                                         fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                                        lineNumber: 95,
+                                                        lineNumber: 115,
                                                         columnNumber: 23
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                                    lineNumber: 89,
+                                                    lineNumber: 109,
                                                     columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                                lineNumber: 88,
+                                                lineNumber: 108,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -450,7 +467,7 @@ function Contact() {
                                                         children: item.label
                                                     }, void 0, false, {
                                                         fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                                        lineNumber: 104,
+                                                        lineNumber: 124,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -458,30 +475,30 @@ function Contact() {
                                                         children: item.value
                                                     }, void 0, false, {
                                                         fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                                        lineNumber: 107,
+                                                        lineNumber: 127,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                                lineNumber: 103,
+                                                lineNumber: 123,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, item.label, true, {
                                         fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                        lineNumber: 87,
+                                        lineNumber: 107,
                                         columnNumber: 17
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                lineNumber: 75,
+                                lineNumber: 95,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                        lineNumber: 63,
+                        lineNumber: 83,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -503,17 +520,17 @@ function Contact() {
                                             d: "M5 13l4 4L19 7"
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                            lineNumber: 121,
+                                            lineNumber: 141,
                                             columnNumber: 21
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                        lineNumber: 120,
+                                        lineNumber: 140,
                                         columnNumber: 19
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                    lineNumber: 119,
+                                    lineNumber: 139,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -521,7 +538,7 @@ function Contact() {
                                     children: "Pesan Terkirim"
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                    lineNumber: 129,
+                                    lineNumber: 149,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -529,7 +546,7 @@ function Contact() {
                                     children: "Terima kasih. Permintaan konsultasi Anda telah dikirim ke tim kami. Kami akan menghubungi Anda melalui email atau telepon yang dicantumkan."
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                    lineNumber: 132,
+                                    lineNumber: 152,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -539,13 +556,13 @@ function Contact() {
                                     children: "Kirim pesan lain"
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                    lineNumber: 136,
+                                    lineNumber: 156,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                            lineNumber: 118,
+                            lineNumber: 138,
                             columnNumber: 15
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
                             onSubmit: handleSubmit,
@@ -558,7 +575,7 @@ function Contact() {
                                     children: errorMessage
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                    lineNumber: 147,
+                                    lineNumber: 167,
                                     columnNumber: 19
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -572,7 +589,7 @@ function Contact() {
                                                     children: "Nama Lengkap"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                                    lineNumber: 157,
+                                                    lineNumber: 177,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -586,7 +603,7 @@ function Contact() {
                                                     placeholder: "Nama Anda"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                                    lineNumber: 160,
+                                                    lineNumber: 180,
                                                     columnNumber: 21
                                                 }, this),
                                                 fieldErrors.nama && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -594,13 +611,13 @@ function Contact() {
                                                     children: fieldErrors.nama
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                                    lineNumber: 171,
+                                                    lineNumber: 191,
                                                     columnNumber: 23
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                            lineNumber: 156,
+                                            lineNumber: 176,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -611,7 +628,7 @@ function Contact() {
                                                     children: "Nomor Telepon"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                                    lineNumber: 175,
+                                                    lineNumber: 195,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -625,7 +642,7 @@ function Contact() {
                                                     placeholder: "08xx xxxx xxxx"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                                    lineNumber: 178,
+                                                    lineNumber: 198,
                                                     columnNumber: 21
                                                 }, this),
                                                 fieldErrors.telepon && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -633,19 +650,19 @@ function Contact() {
                                                     children: fieldErrors.telepon
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                                    lineNumber: 189,
+                                                    lineNumber: 209,
                                                     columnNumber: 23
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                            lineNumber: 174,
+                                            lineNumber: 194,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                    lineNumber: 155,
+                                    lineNumber: 175,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -656,7 +673,7 @@ function Contact() {
                                             children: "Email"
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                            lineNumber: 194,
+                                            lineNumber: 214,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -670,7 +687,7 @@ function Contact() {
                                             placeholder: "nama@perusahaan.com"
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                            lineNumber: 197,
+                                            lineNumber: 217,
                                             columnNumber: 19
                                         }, this),
                                         fieldErrors.email && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -678,13 +695,13 @@ function Contact() {
                                             children: fieldErrors.email
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                            lineNumber: 208,
+                                            lineNumber: 228,
                                             columnNumber: 21
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                    lineNumber: 193,
+                                    lineNumber: 213,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -695,7 +712,7 @@ function Contact() {
                                             children: "Jenis Layanan"
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                            lineNumber: 212,
+                                            lineNumber: 232,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -709,68 +726,68 @@ function Contact() {
                                                     children: "Pilih area kebutuhan"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                                    lineNumber: 221,
+                                                    lineNumber: 241,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                     children: "Hukum Perusahaan & Korporasi"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                                    lineNumber: 222,
+                                                    lineNumber: 242,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                     children: "Litigasi & Arbitrase"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                                    lineNumber: 223,
+                                                    lineNumber: 243,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                     children: "Ketenagakerjaan"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                                    lineNumber: 224,
+                                                    lineNumber: 244,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                     children: "Properti & Real Estat"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                                    lineNumber: 225,
+                                                    lineNumber: 245,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                     children: "Kepatuhan & Regulasi"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                                    lineNumber: 226,
+                                                    lineNumber: 246,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                     children: "Hukum Keluarga & Waris"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                                    lineNumber: 227,
+                                                    lineNumber: 247,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
                                                     children: "Lainnya"
                                                 }, void 0, false, {
                                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                                    lineNumber: 228,
+                                                    lineNumber: 248,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                            lineNumber: 215,
+                                            lineNumber: 235,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                    lineNumber: 211,
+                                    lineNumber: 231,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -781,7 +798,7 @@ function Contact() {
                                             children: "Uraian Singkat"
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                            lineNumber: 232,
+                                            lineNumber: 252,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -795,7 +812,7 @@ function Contact() {
                                             placeholder: "Jelaskan kebutuhan hukum Anda secara ringkas..."
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                            lineNumber: 235,
+                                            lineNumber: 255,
                                             columnNumber: 19
                                         }, this),
                                         fieldErrors.pesan && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -803,58 +820,58 @@ function Contact() {
                                             children: fieldErrors.pesan
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                            lineNumber: 246,
+                                            lineNumber: 266,
                                             columnNumber: 21
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                    lineNumber: 231,
+                                    lineNumber: 251,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     type: "submit",
                                     disabled: status === "loading",
-                                    className: "w-full rounded-sm bg-navy py-3.5 text-sm font-semibold text-white transition-colors hover:bg-navy-light disabled:cursor-not-allowed disabled:opacity-70",
-                                    children: status === "loading" ? "Mengirim..." : "Kirim Permintaan Konsultasi"
+                                    className: "w-full rounded-sm bg-green-600 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-70",
+                                    children: status === "loading" ? "Membuka WhatsApp..." : "Konsultasi via WhatsApp"
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                    lineNumber: 249,
+                                    lineNumber: 269,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$untitled__folder__2$2f$WebsiteLaw$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     className: "text-center text-xs text-muted",
-                                    children: "Data Anda dijaga kerahasiaan sesuai kode etik advokat dan UU PDP."
+                                    children: "Dengan mengirimkan, Anda akan diarahkan ke WhatsApp untuk melanjutkan konsultasi."
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                                    lineNumber: 256,
+                                    lineNumber: 276,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                            lineNumber: 145,
+                            lineNumber: 165,
                             columnNumber: 15
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                        lineNumber: 116,
+                        lineNumber: 136,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-                lineNumber: 62,
+                lineNumber: 82,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-            lineNumber: 61,
+            lineNumber: 81,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/Desktop/untitled folder 2/WebsiteLaw/src/components/Contact.tsx",
-        lineNumber: 60,
+        lineNumber: 80,
         columnNumber: 5
     }, this);
 }
