@@ -26,7 +26,7 @@ export default function Contact() {
       layanan || "-"
     }\nNomor telepon: ${telepon || "-"}\nEmail: ${email || "-"}\nPesan: ${pesan || "-"}`;
 
-    const OFFICE_WA = "+62 812 3456 7890";
+    const OFFICE_WA = "+62 813 8538 6986";
     const phone = normalizePhoneNumber(OFFICE_WA);
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
