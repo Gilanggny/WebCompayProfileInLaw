@@ -2,17 +2,20 @@
 
 import { useState } from "react";
 import Logo from "@/components/Logo";
-
-const navLinks = [
-  { href: "#beranda", label: "Beranda" },
-  { href: "#tentang", label: "Tentang Kami" },
-  { href: "#layanan", label: "Layanan" },
-  { href: "#tim", label: "Tim Advokat" },
-  { href: "#kontak", label: "Kontak" },
-];
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const { t } = useLanguage();
+
+  const navLinks = [
+    { href: "#beranda", label: t.nav.home },
+    { href: "#tentang", label: t.nav.about },
+    { href: "#layanan", label: t.nav.services },
+    { href: "#tim", label: t.nav.team },
+    { href: "#kontak", label: t.nav.contact },
+  ];
 
   return (
     <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-navy/95 backdrop-blur-md">
@@ -31,29 +34,35 @@ export default function Header() {
           ))}
         </nav>
 
-        <a
-          href="#kontak"
-          className="hidden rounded-sm bg-gold px-5 py-2.5 text-sm font-semibold text-navy transition-colors hover:bg-gold-light md:inline-block"
-        >
-          Konsultasi Gratis
-        </a>
+        <div className="hidden items-center gap-4 md:flex">
+          <LanguageSwitcher />
+          <a
+            href="#kontak"
+            className="rounded-sm bg-gold px-5 py-2.5 text-sm font-semibold text-navy transition-colors hover:bg-gold-light"
+          >
+            {t.nav.freeConsult}
+          </a>
+        </div>
 
-        <button
-          type="button"
-          aria-label={open ? "Tutup menu" : "Buka menu"}
-          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
-          onClick={() => setOpen(!open)}
-        >
-          <span
-            className={`h-0.5 w-6 bg-white transition-transform ${open ? "translate-y-2 rotate-45" : ""}`}
-          />
-          <span
-            className={`h-0.5 w-6 bg-white transition-opacity ${open ? "opacity-0" : ""}`}
-          />
-          <span
-            className={`h-0.5 w-6 bg-white transition-transform ${open ? "-translate-y-2 -rotate-45" : ""}`}
-          />
-        </button>
+        <div className="flex items-center gap-3 md:hidden">
+          <LanguageSwitcher />
+          <button
+            type="button"
+            aria-label={open ? t.nav.closeMenu : t.nav.openMenu}
+            className="flex h-10 w-10 flex-col items-center justify-center gap-1.5"
+            onClick={() => setOpen(!open)}
+          >
+            <span
+              className={`h-0.5 w-6 bg-white transition-transform ${open ? "translate-y-2 rotate-45" : ""}`}
+            />
+            <span
+              className={`h-0.5 w-6 bg-white transition-opacity ${open ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`h-0.5 w-6 bg-white transition-transform ${open ? "-translate-y-2 -rotate-45" : ""}`}
+            />
+          </button>
+        </div>
       </div>
 
       {open && (
@@ -76,7 +85,7 @@ export default function Header() {
                 className="inline-block rounded-sm bg-gold px-5 py-2.5 text-sm font-semibold text-navy"
                 onClick={() => setOpen(false)}
               >
-                Konsultasi Gratis
+                {t.nav.freeConsult}
               </a>
             </li>
           </ul>

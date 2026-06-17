@@ -1,8 +1,19 @@
+"use client";
+
 import Logo from "@/components/Logo";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { company } from "@/lib/company";
 
 export default function Footer() {
+  const { t } = useLanguage();
   const year = new Date().getFullYear();
+
+  const footerLinks = [
+    { href: "#tentang", label: t.footer.about },
+    { href: "#layanan", label: t.footer.services },
+    { href: "#tim", label: t.footer.team },
+    { href: "#kontak", label: t.footer.contact },
+  ];
 
   return (
     <footer className="border-t border-white/10 bg-navy py-12">
@@ -11,27 +22,19 @@ export default function Footer() {
           <Logo href="#beranda" size="lg" onDark showTagline />
 
           <nav className="flex flex-wrap justify-center gap-6 text-sm text-white/50">
-            <a href="#tentang" className="hover:text-gold">
-              Tentang
-            </a>
-            <a href="#layanan" className="hover:text-gold">
-              Layanan
-            </a>
-            <a href="#tim" className="hover:text-gold">
-              Tim
-            </a>
-            <a href="#kontak" className="hover:text-gold">
-              Kontak
-            </a>
+            {footerLinks.map((link) => (
+              <a key={link.href} href={link.href} className="hover:text-gold">
+                {link.label}
+              </a>
+            ))}
           </nav>
         </div>
 
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-center text-xs text-white/35 md:flex-row md:text-left">
-          <p>© {year} {company.fullName}. Hak cipta dilindungi.</p>
           <p>
-            Informasi di situs ini bersifat umum dan bukan nasihat hukum. Hubungi
-            advokat untuk konsultasi spesifik.
+            © {year} {company.fullName}. {t.footer.copyright}
           </p>
+          <p>{t.footer.disclaimer}</p>
         </div>
       </div>
     </footer>

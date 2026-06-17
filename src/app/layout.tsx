@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Source_Sans_3 } from "next/font/google";
+import Providers from "@/components/Providers";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -37,7 +38,9 @@ export default function RootLayout({
       lang="id"
       className={`${playfair.variable} ${sourceSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

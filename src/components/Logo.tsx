@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { company } from "@/lib/company";
 
 const sizes = {
@@ -37,6 +40,7 @@ export default function Logo({
   onDark = false,
   className = "",
 }: LogoProps) {
+  const { t } = useLanguage();
   const dimension = sizes[size];
 
   const image = (
@@ -81,7 +85,7 @@ export default function Logo({
           </p>
           {showTagline && (
             <p className="mt-1 hidden text-[10px] text-white/45 sm:block">
-              {company.tagline}
+              {t.footer.tagline}
             </p>
           )}
         </div>

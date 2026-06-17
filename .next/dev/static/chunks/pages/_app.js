@@ -1,0 +1,13 @@
+__turbopack_load_page_chunks__("/_app", [
+  "static/chunks/0hxi_next_dist_compiled_0mmf7~k._.js",
+  "static/chunks/0hxi_next_dist_shared_lib_04yv2rk._.js",
+  "static/chunks/0hxi_next_dist_client_0bmqy~r._.js",
+  "static/chunks/0hxi_next_dist_0gkjlk0._.js",
+  "static/chunks/0hxi_next_app_084nb3v.js",
+  "static/chunks/[next]_entry_page-loader_ts_13n0u.r._.js",
+  "static/chunks/0hxi_react-dom_0gyjb3i._.js",
+  "static/chunks/0hxi_03rcvh_._.js",
+  "static/chunks/[root-of-the-server]__11n9..c._.js",
+  "static/chunks/Desktop_untitled folder 2_WebsiteLaw_pages__app_07xvfw~._.js",
+  "static/chunks/turbopack-Desktop_untitled folder 2_WebsiteLaw_pages__app_0ksxlv-._.js"
+])

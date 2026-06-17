@@ -1,6 +1,16 @@
-import { company } from "@/lib/company";
+"use client";
+
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Hero() {
+  const { t } = useLanguage();
+
+  const stats = [
+    { value: "17+", label: t.hero.stats.years },
+    { value: "850+", label: t.hero.stats.cases },
+    { value: "98%", label: t.hero.stats.clients },
+  ];
+
   return (
     <section
       id="beranda"
@@ -19,29 +29,27 @@ export default function Hero() {
         <div className="flex-1">
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-gold">
             <span className="h-1.5 w-1.5 rounded-full bg-gold" />
-            Firma Hukum Terpercaya sejak 2008
+            {t.hero.badge}
           </p>
           <h1 className="font-serif text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
-            Solusi Hukum
-            <span className="block text-gold">yang Tegas & Terukur</span>
+            {t.hero.title}
+            <span className="block text-gold">{t.hero.titleHighlight}</span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/70">
-            {company.fullName} mendampingi perusahaan dan individu dalam
-            sengketa bisnis, regulasi korporasi, ketenagakerjaan, hingga properti
-            — dengan integritas dan pendekatan strategis.
+            {t.hero.description}
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <a
               href="#kontak"
               className="rounded-sm bg-gold px-8 py-3.5 text-sm font-semibold text-navy transition-colors hover:bg-gold-light"
             >
-              Jadwalkan Konsultasi
+              {t.hero.ctaConsult}
             </a>
             <a
               href="#layanan"
               className="rounded-sm border border-white/25 px-8 py-3.5 text-sm font-medium text-white transition-colors hover:border-gold/50 hover:text-gold"
             >
-              Lihat Layanan
+              {t.hero.ctaServices}
             </a>
           </div>
         </div>
@@ -50,24 +58,19 @@ export default function Hero() {
           <div className="relative rounded-sm border border-white/10 bg-navy-light/80 p-8 backdrop-blur sm:p-10">
             <div className="absolute -top-px left-8 right-8 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
             <blockquote className="font-serif text-xl italic leading-relaxed text-white/90 sm:text-2xl">
-              &ldquo;Hukum bukan sekadar aturan — ia adalah fondasi kepercayaan
-              dalam setiap keputusan bisnis Anda.&rdquo;
+              &ldquo;{t.hero.quote}&rdquo;
             </blockquote>
             <footer className="mt-6 flex items-center gap-4 border-t border-white/10 pt-6">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gold/20 font-serif text-lg text-gold">
                 AR
               </div>
               <div>
-                <p className="font-medium text-white">Dr. Aida Ardini, S.H., M.H.</p>
-                <p className="text-sm text-white/50">Managing Partner</p>
+                <p className="font-medium text-white">Dr. Aida Ardini S.H.,M.H.,CLA.,CCD.,CMED.</p>
+                <p className="text-sm text-white/50">{t.hero.managingPartner}</p>
               </div>
             </footer>
             <dl className="mt-8 grid grid-cols-3 gap-4 border-t border-white/10 pt-8">
-              {[
-                { value: "17+", label: "Tahun Pengalaman" },
-                { value: "850+", label: "Kasus Ditangani" },
-                { value: "98%", label: "Klien Puas" },
-              ].map((stat) => (
+              {stats.map((stat) => (
                 <div key={stat.label} className="text-center">
                   <dt className="font-serif text-2xl font-semibold text-gold">
                     {stat.value}
@@ -81,9 +84,18 @@ export default function Hero() {
       </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <a href="#tentang" aria-label="Scroll ke bawah" className="text-white/40 hover:text-gold">
+        <a
+          href="#tentang"
+          aria-label={t.hero.scrollDown}
+          className="text-white/40 hover:text-gold"
+        >
           <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 14l-7 7m0 0l-7-7m7 7V3"
+            />
           </svg>
         </a>
       </div>
