@@ -96,7 +96,7 @@ const teamNames = [
   // "Dr. Aida Ardini S.H.,M.H.,CLA.,CCD.,CMED.",
 ] as const;
 
-export const teamInitials = ["AR", "DW", "BP", "SK"] as const;
+export const teamInitials = ["AA", "AA", "AA", "AA"] as const;
 
 export { teamNames };
 
@@ -204,23 +204,28 @@ export const translations: Record<Locale, Translations> = {
       members: [
         {
           role: "Managing Partner",
-          focus: "Litigasi & Arbitrase",
-          bio: "Alumni Universitas Indonesia. 20 tahun pengalaman di pengadilan niaga dan BANI.",
+          focus: "Ultimate Solution Lawfirm",
+          bio: "",
         },
         {
-          role: "Senior Partner",
-          focus: "Hukum Korporasi & M&A",
-          bio: "Magister Hukum dari National University of Singapore. Spesialis transaksi lintas batas.",
+          role: "Managing Partner",
+          focus: "Ultimate Solution Lawfirm",
+          bio: "",        
         },
         {
-          role: "Partner",
-          focus: "Ketenagakerjaan & Industrial Relations",
-          bio: "Mendampingi lebih dari 120 perusahaan dalam restrukturisasi dan sengketa PHI.",
+          role: "Managing Partner",
+          focus: "Ultimate Solution Lawfirm",
+          bio: "",        
         },
         {
-          role: "Partner",
-          focus: "Properti & Kepatuhan",
-          bio: "Ahli sertifikasi tanah dan regulasi OSS. Aktif di forum hukum properti nasional.",
+          role: "Managing Partner",
+          focus: "Ultimate Solution Lawfirm",
+          bio: "",        
+        },
+        {
+          role: "Managing Partner",
+          focus: "Ultimate Solution Lawfirm",
+          bio: "",        
         },
       ],
     },
@@ -385,23 +390,23 @@ export const translations: Record<Locale, Translations> = {
       members: [
         {
           role: "Managing Partner",
-          focus: "Litigation & Arbitration",
-          bio: "University of Indonesia alumnus. 20 years of experience in commercial courts and BANI.",
+          focus: "",
+          bio: "",
         },
         {
           role: "Senior Partner",
-          focus: "Corporate Law & M&A",
-          bio: "Master of Laws from National University of Singapore. Specialist in cross-border transactions.",
+          focus: "",
+          bio: "",
         },
         {
           role: "Partner",
-          focus: "Employment & Industrial Relations",
-          bio: "Advised more than 120 companies on restructuring and industrial relations disputes.",
+          focus: "",
+          bio: "",
         },
         {
           role: "Partner",
-          focus: "Property & Compliance",
-          bio: "Expert in land certification and OSS regulations. Active in national property law forums.",
+          focus: "",
+          bio: "",
         },
       ],
     },

@@ -67,7 +67,7 @@ export default function Contact() {
     { label: t.contact.office, value: officeLocation.addressMultiline },
     { label: t.contact.phone, value: "+62 821 1333 302" },
     { label: t.contact.whatsapp, value: "+62 821 1333 302" },
-    { label: t.contact.email, value: "kontak@nusantaralegal.id" },
+    { label: t.contact.email, value: "contact@ultimatesolution.co.id" },
     { label: t.contact.hours, value: t.contact.hoursValue },
   ];
 
