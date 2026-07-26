@@ -91,10 +91,9 @@ export type Translations = {
 };
 
 const teamNames = [
-  "Dr. Ahmad Rizaldi, S.H., M.H.",
-  "Dewi Wulandari, S.H., LL.M.",
-  "Bambang Prasetyo, S.H.",
-  "Siti Kartika, S.H., M.Kn.",
+  "Dr. Aida Ardini S.H.,M.H.,CLA.,CCD.,CMED.",
+  "Dr. Aida Ardini S.H.,M.H.,CLA.,CCD.,CMED.",
+  "Dr. Aida Ardini S.H.,M.H.,CLA.,CCD.,CMED.",
 ] as const;
 
 export const teamInitials = ["AR", "DW", "BP", "SK"] as const;
