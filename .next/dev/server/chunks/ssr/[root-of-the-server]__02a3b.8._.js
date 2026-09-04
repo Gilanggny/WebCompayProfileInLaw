@@ -31,17 +31,12 @@ __turbopack_context__.s([
     "translations",
     ()=>translations
 ]);
-const teamNames = [
-    "Dr. Ahmad Rizaldi, S.H., M.H.",
-    "Dewi Wulandari, S.H., LL.M.",
-    "Bambang Prasetyo, S.H.",
-    "Siti Kartika, S.H., M.Kn."
-];
+const teamNames = [];
 const teamInitials = [
-    "AR",
-    "DW",
-    "BP",
-    "SK"
+    "AA",
+    "AA",
+    "AA",
+    "AA"
 ];
 ;
 const translations = {
@@ -78,9 +73,9 @@ const translations = {
             p1: "Kami menyediakan layanan penyelesaian sengketa secara komprehensif melalui pendekatan litigasi maupun alternatif penyelesaian sengketa (ADR), dengan mengedepankan strategi hukum yang terukur, kami membantu klien dalam menghadapi berbagai sengketa bisnis, perdata, ketenagakerjaan, maupun korporasi secara efektif dan profesional.",
             p2: "Tim kami memahami bahwa setiap sengketa tidak hanya berkaitan dengan aspek hukum, tetapi juga reputasi dan keberlangsungan bisnis klien. Oleh karena itu, kami berfokus pada solusi yang tidak hanya memenangkan perkara, tetapi juga memberikan perlindungan jangka panjang terhadap kepentingan klien.",
             credentials: [
-                "Terdaftar di Perhimpunan Advokat Indonesia (PERADI)",
-                "Anggota International Bar Association (IBA)",
-                "ISO 9001:2015 — Manajemen Mutu Layanan Hukum"
+                "",
+                "",
+                ""
             ],
             values: [
                 {
@@ -135,23 +130,28 @@ const translations = {
             members: [
                 {
                     role: "Managing Partner",
-                    focus: "Litigasi & Arbitrase",
-                    bio: "Alumni Universitas Indonesia. 20 tahun pengalaman di pengadilan niaga dan BANI."
+                    focus: "Ultimate Solution Lawfirm",
+                    bio: ""
                 },
                 {
-                    role: "Senior Partner",
-                    focus: "Hukum Korporasi & M&A",
-                    bio: "Magister Hukum dari National University of Singapore. Spesialis transaksi lintas batas."
+                    role: "Managing Partner",
+                    focus: "Ultimate Solution Lawfirm",
+                    bio: ""
                 },
                 {
-                    role: "Partner",
-                    focus: "Ketenagakerjaan & Industrial Relations",
-                    bio: "Mendampingi lebih dari 120 perusahaan dalam restrukturisasi dan sengketa PHI."
+                    role: "Managing Partner",
+                    focus: "Ultimate Solution Lawfirm",
+                    bio: ""
                 },
                 {
-                    role: "Partner",
-                    focus: "Properti & Kepatuhan",
-                    bio: "Ahli sertifikasi tanah dan regulasi OSS. Aktif di forum hukum properti nasional."
+                    role: "Managing Partner",
+                    focus: "Ultimate Solution Lawfirm",
+                    bio: ""
+                },
+                {
+                    role: "Managing Partner",
+                    focus: "Ultimate Solution Lawfirm",
+                    bio: ""
                 }
             ]
         },
@@ -242,9 +242,9 @@ const translations = {
             p1: "We provide comprehensive dispute resolution services through litigation and alternative dispute resolution (ADR) approaches. Emphasizing measurable legal strategies, we assist clients in effectively and professionally resolving various business, civil, employment, and corporate disputes",
             p2: "Our team understands that every dispute concerns not only the legal aspects but also the reputation and sustainability of our clients' businesses. Therefore, we focus on solutions that not only win the case but also provide long-term protection for our clients' interests..",
             credentials: [
-                "Registered with the Indonesian Advocates Association (PERADI)",
-                "Member of the International Bar Association (IBA)",
-                "ISO 9001:2015 — Legal Services Quality Management"
+                "",
+                "",
+                ""
             ],
             values: [
                 {
@@ -299,23 +299,23 @@ const translations = {
             members: [
                 {
                     role: "Managing Partner",
-                    focus: "Litigation & Arbitration",
-                    bio: "University of Indonesia alumnus. 20 years of experience in commercial courts and BANI."
+                    focus: "",
+                    bio: ""
                 },
                 {
                     role: "Senior Partner",
-                    focus: "Corporate Law & M&A",
-                    bio: "Master of Laws from National University of Singapore. Specialist in cross-border transactions."
+                    focus: "",
+                    bio: ""
                 },
                 {
                     role: "Partner",
-                    focus: "Employment & Industrial Relations",
-                    bio: "Advised more than 120 companies on restructuring and industrial relations disputes."
+                    focus: "",
+                    bio: ""
                 },
                 {
                     role: "Partner",
-                    focus: "Property & Compliance",
-                    bio: "Expert in land certification and OSS regulations. Active in national property law forums."
+                    focus: "",
+                    bio: ""
                 }
             ]
         },

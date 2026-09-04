@@ -1287,7 +1287,7 @@ function Contact() {
         },
         {
             label: t.contact.email,
-            value: "kontak@nusantaralegal.id"
+            value: "contact@ultimatesolution.co.id"
         },
         {
             label: t.contact.hours,

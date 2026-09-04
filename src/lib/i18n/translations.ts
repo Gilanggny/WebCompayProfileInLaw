@@ -136,9 +136,9 @@ export const translations: Record<Locale, Translations> = {
       p1: "Kami menyediakan layanan penyelesaian sengketa secara komprehensif melalui pendekatan litigasi maupun alternatif penyelesaian sengketa (ADR), dengan mengedepankan strategi hukum yang terukur, kami membantu klien dalam menghadapi berbagai sengketa bisnis, perdata, ketenagakerjaan, maupun korporasi secara efektif dan profesional.",
       p2: "Tim kami memahami bahwa setiap sengketa tidak hanya berkaitan dengan aspek hukum, tetapi juga reputasi dan keberlangsungan bisnis klien. Oleh karena itu, kami berfokus pada solusi yang tidak hanya memenangkan perkara, tetapi juga memberikan perlindungan jangka panjang terhadap kepentingan klien.",
       credentials: [
-        "Terdaftar di Perhimpunan Advokat Indonesia (PERADI)",
-        "Anggota International Bar Association (IBA)",
-        "ISO 9001:2015 — Manajemen Mutu Layanan Hukum",
+        "",
+        "",
+        "",
       ],
       values: [
         {
@@ -322,9 +322,9 @@ export const translations: Record<Locale, Translations> = {
       p1: "We provide comprehensive dispute resolution services through litigation and alternative dispute resolution (ADR) approaches. Emphasizing measurable legal strategies, we assist clients in effectively and professionally resolving various business, civil, employment, and corporate disputes",
       p2: "Our team understands that every dispute concerns not only the legal aspects but also the reputation and sustainability of our clients' businesses. Therefore, we focus on solutions that not only win the case but also provide long-term protection for our clients' interests..",
       credentials: [
-        "Registered with the Indonesian Advocates Association (PERADI)",
-        "Member of the International Bar Association (IBA)",
-        "ISO 9001:2015 — Legal Services Quality Management",
+        "",
+        "",
+        "",
       ],
       values: [
         {
