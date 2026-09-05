@@ -28,10 +28,13 @@ __turbopack_context__.s([
     "translations",
     ()=>translations
 ]);
-const teamNames = [];
+const teamNames = [
+    "Muhammad Hayyan Ul Haq, PhD",
+    "Silwandang wolena salampessy, S.H.,C.MED."
+];
 const teamInitials = [
-    "AA",
-    "AA",
+    "MH",
+    "SW",
     "AA",
     "AA"
 ];

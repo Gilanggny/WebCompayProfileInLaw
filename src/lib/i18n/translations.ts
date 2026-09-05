@@ -91,12 +91,12 @@ export type Translations = {
 };
 
 const teamNames = [
-  // "Dr. Aida Ardini S.H.,M.H.,CLA.,CCD.,CMED.",
-  // "Dr. Aida Ardini S.H.,M.H.,CLA.,CCD.,CMED.",
+  "Muhammad Hayyan Ul Haq, PhD",
+  "Silwandang wolena salampessy, S.H.,C.MED.",
   // "Dr. Aida Ardini S.H.,M.H.,CLA.,CCD.,CMED.",
 ] as const;
 
-export const teamInitials = ["AA", "AA", "AA", "AA"] as const;
+export const teamInitials = ["MH", "SW", "AA", "AA"] as const;
 
 export { teamNames };
 
